@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+# ignore working files
+ecommerce_project/ecommerce_project/testing/
