@@ -1,6 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.views.generic import TemplateView
 
 
-def landing(request):
-    return render(request, 'ecommerce_project/landing.html', {})
+class HomePageView(TemplateView):
+    template_name = 'home_page.html'
