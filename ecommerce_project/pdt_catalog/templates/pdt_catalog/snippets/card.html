@@ -1,0 +1,19 @@
+{% block content %}
+<div class="card" style="width: 18rem;">
+  {% if instance.image %}
+  <a href="{{ instance.get_absolute_url }}">
+    <img
+      class="card-img-top"
+      src="{{ instance.image.url }}"
+      alt="{{ instance.name }} image"/></a>
+  {% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ instance.name }}</h5>
+    <p class="card-text">
+      {{ instance.description|truncatewords:10 }}
+    </p>
+    <p class="card-text">{{ instance.price }}</p>
+    <a href="{{ instance.get_absolute_url }}" class="btn btn-primary">View</a>
+  </div>
+</div>
+{% endblock %}
