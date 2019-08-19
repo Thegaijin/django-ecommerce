@@ -1,8 +1,9 @@
 import random
 import os
-from django.db import models
 from django.urls import reverse
 from django.dispatch import receiver
+from django.db import models
+from django.db.models import Q
 from django.db.models.signals import pre_save
 
 from .utils import unique_slug_generator
@@ -47,6 +48,10 @@ class ProductManager(models.Manager):
             return qs.first()
         return None
 
+    def search(self, query):
+        lookups = Q(name__icontains=query) | Q(description__icontains=query)
+        return self.get_queryset().filter(lookups).distinct()
+
 
 class Product(models.Model):
     name = models.CharField(max_length=120, unique=True, blank=False)
@@ -72,7 +77,7 @@ class Product(models.Model):
         # return reverse('pdt_catalog:product', kwargs={'pk': self.id})
 
 
-# NOTE: CLean up
+# NOTE: Clean up
 
 
 @receiver(pre_save, sender=Product)
